@@ -27,13 +27,13 @@ def run_yolo_model():
                 label = categories[int(cls)]
 
                 if label == 'No Mask':
-                    box_color = (0, 0, 255)  # Kırmızı
+                    box_color = (0, 0, 255)
                 elif label == 'Masked':
-                    box_color = (0, 255, 0)  # Yeşil
+                    box_color = (0, 255, 0)
                 elif label == 'Incorrect Mask':
-                    box_color = (0, 255, 255)  # Sarı
+                    box_color = (0, 255, 255)
                 else:
-                    box_color = (255, 255, 255)  # Varsayılan Beyaz
+                    box_color = (255, 255, 255)
 
                 cv2.rectangle(frame, (x1, y1), (x2, y2), box_color, 2)
                 cv2.putText(frame, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
@@ -65,10 +65,9 @@ def run_ssd_model(model_file='SSD/ssd_model.pth'):
         if not success:
             break
 
-        # Yazıyı eklemek için çerçeveye metin yerleştirme
         cv2.putText(frame, "Please try in a well-lit environment to see best performance.",
-                    (10, 30),  # Sağ üst köşe için koordinatlar
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 255), 2)  # Sarı renk, kalınlık: 2
+                    (10, 30),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 255), 2)
 
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         detected_faces = face_detector.detectMultiScale(gray_frame, scaleFactor=1.1, minNeighbors=5, minSize=(100, 100))
